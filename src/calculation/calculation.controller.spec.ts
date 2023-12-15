@@ -95,6 +95,15 @@ describe('CalculationController', () => {
         .send({ expression: '1/0' })
         .expect(400);
     });
+
+    it('should accept and correctly handle a valid expression with decimal numbers', async () => {
+      const response = await request(app.getHttpServer())
+        .post('/calculate')
+        .send({ expression: '9140637 + 1.1' })
+        .expect(200);
+
+      expect(response.body.result).toBeDefined();
+    });
   });
 
   afterAll(async () => {

@@ -8,8 +8,11 @@ export class CalculationDto {
   })
   @IsNotEmpty({ message: 'Expression is required' })
   @IsString({ message: 'Expression must be a string' })
-  @Matches(/^(?!.*[*/]{2})[-+]?[0-9]+(?:[ ]*[+\-*/][ ]*[0-9]+)*$/, {
-    message: 'Expression contains invalid characters',
-  })
+  @Matches(
+    /^(?!.*[+\-*/]{2})[-+]?[0-9]+(\.[0-9]+)?(?:\s*[+\-*/]\s*(?:[0-9]+(\.[0-9]+)?))*$/,
+    {
+      message: 'Expression contains invalid characters',
+    },
+  )
   expression: string;
 }
